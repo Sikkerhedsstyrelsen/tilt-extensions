@@ -6,8 +6,9 @@ def dotnet_build(ref,context = ".", version = "latest"):
             from mcr.microsoft.com/dotnet/sdk:" + version + "   \n\
             workdir app                                         \n\
             copy . .                                            \n\
+            dotnet restore                                      \n\
             env DOTNET_WATCH_RESTART_ON_RUDE_EDIT=true          \n\
-            entrypoint dotnet watch run                         \n\
+            entrypoint dotnet watch run --no-restore            \n\
         ",
         live_update = [
             fall_back_on([
