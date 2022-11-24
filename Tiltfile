@@ -5,6 +5,8 @@ def dotnet_build(ref,context = ".", version = "latest"):
         dockerfile_contents = "                                 \n\
             from mcr.microsoft.com/dotnet/sdk:" + version + "   \n\
             workdir app                                         \n\
+            run apt-get update -y                               \n\
+            run apt-get install -y gss-ntlmssp                  \n\
             copy . .                                            \n\
             run dotnet restore                                  \n\
             env DOTNET_WATCH_RESTART_ON_RUDE_EDIT=true          \n\
